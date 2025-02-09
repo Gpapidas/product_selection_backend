@@ -5,3 +5,7 @@ psycopg2-binary==2.9.10
 python-dotenv==1.0.1
 
 djangorestframework==3.15.2
+
+drf-spectacular==0.28.0
+
+drf-standardized-errors==0.14.1

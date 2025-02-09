@@ -1,0 +1,17 @@
+-r requirements.txt
+
+pipdeptree
+
+pip-audit==2.7.3
+
+bandit==1.8.2
+
+pylint-plugin-utils==0.8.2
+# required by pylint-plugin-utils
+pylint>=1.7
+
+black==25.1.0
+
+nplusone==1.0.0
+
+django-extensions==3.2.3

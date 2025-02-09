@@ -25,6 +25,7 @@ API_V1_PATH = API_PATH + "v1/"
 urlpatterns = [
     path('admin/', admin.site.urls),
     path(f"{API_V1_PATH}general/", include(("shared.urls", "shared"), namespace='shared')),
+    path(f"{API_V1_PATH}auth/", include(("users.urls", "users"), namespace='users')),
 ]
 
 if ENVIRONMENT == "development":

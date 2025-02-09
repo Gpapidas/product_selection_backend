@@ -26,8 +26,10 @@ INSTALLED_APPS = [
     'rest_framework',
     "drf_spectacular",
     "rest_framework_simplejwt.token_blacklist",
+    "django_filters",
     "shared",
-    "users"
+    "users",
+    "products"
 ]
 
 MIDDLEWARE = [
@@ -145,9 +147,10 @@ LOGGING = {
 REST_FRAMEWORK = {
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
     "EXCEPTION_HANDLER": "drf_standardized_errors.handler.exception_handler",
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ),
+    "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"]
 }
 
 DRF_STANDARDIZED_ERRORS = {"ENABLE_IN_DEBUG_FOR_UNHANDLED_EXCEPTIONS": True}
@@ -182,3 +185,7 @@ SIMPLE_JWT = {
 }
 
 TEST_RUNNER = 'shared.tests.runner.CustomTestRunner'
+
+SESSION_COOKIE_AGE = int(timedelta(days=7).total_seconds())
+SESSION_ENGINE = "django.contrib.sessions.backends.db"
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False

@@ -26,6 +26,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path(f"{API_V1_PATH}general/", include(("shared.urls", "shared"), namespace='shared')),
     path(f"{API_V1_PATH}auth/", include(("users.urls", "users"), namespace='users')),
+    path(f"{API_V1_PATH}products/", include(("products.urls", "products"), namespace='products')),
 ]
 
 if ENVIRONMENT == "development":

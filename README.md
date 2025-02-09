@@ -178,6 +178,7 @@ Login with the credentials created in **Creating a Superuser**.
 - **JWT (JSON Web Token) Authentication** (using `djangorestframework-simplejwt` 5.4.0)
 - **drf-spectacular** 0.28.0 (API documentation)
 - **drf-standardized-errors** 0.14.1 (standardized API error handling)
+- **django-filter** 24.3 (for advanced filtering in DRF)
 - **python-dotenv** 1.0.1 (for environment variable management)
 - **Testing & Code Quality:**
   - **Django TestCase** (built-in Django testing framework)

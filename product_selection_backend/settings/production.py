@@ -7,6 +7,7 @@ import secrets
 import dj_database_url
 
 from product_selection_backend.settings.global_settings import DJANGO_ALLOWED_HOSTS_VAR, HOST, FRONTEND_URL
+from .base import INSTALLED_APPS, MIDDLEWARE
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get(
@@ -26,6 +27,17 @@ SESSION_COOKIE_SECURE = True
 # Ensure HTTPS
 SECURE_SSL_REDIRECT = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+INSTALLED_APPS = INSTALLED_APPS + ["whitenoise.runserver_nostatic"]
+MIDDLEWARE = MIDDLEWARE + ["whitenoise.middleware.WhiteNoiseMiddleware"]
+STORAGES = {
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
+WHITENOISE_MAX_AGE = 700000
+
+WHITENOISE_KEEP_ONLY_HASHED_FILES = True
 
 DATABASES = {
     "default": dj_database_url.config(

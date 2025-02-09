@@ -6,7 +6,7 @@ from products.models import Product
 
 class ProductFilter(django_filters.FilterSet):
     search = django_filters.CharFilter(method="filter_search")
-    ordering = django_filters.OrderingFilter(fields=["name", "price", "stock", "created_at"])
+    ordering = django_filters.OrderingFilter(fields=["id", "name", "description", "price", "stock", "created_at"])
 
     class Meta:
         model = Product

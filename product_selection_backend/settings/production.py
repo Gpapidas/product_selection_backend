@@ -4,6 +4,8 @@ Configuration for production development
 import os
 import secrets
 
+import dj_database_url
+
 from product_selection_backend.settings.global_settings import DJANGO_ALLOWED_HOSTS_VAR, HOST, FRONTEND_URL
 
 # SECURITY WARNING: keep the secret key used in production secret!
@@ -24,3 +26,11 @@ SESSION_COOKIE_SECURE = True
 # Ensure HTTPS
 SECURE_SSL_REDIRECT = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+DATABASES = {
+    "default": dj_database_url.config(
+        env="DATABASE_URL",
+        conn_max_age=600,
+        ssl_require=True,
+    )
+}

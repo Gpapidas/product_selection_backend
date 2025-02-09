@@ -9,6 +9,7 @@ This project uses **JWT-based authentication**. Users log in with their email an
    - If a user provides a valid email and password, they are authenticated.
    - If the email does not exist, a new user is automatically created.
    - A **JWT access token** and a **refresh token** are issued upon login.
+   - User session is initialized.
 
 2. **Token Refresh:**  
    - Access tokens expire after a certain period.
@@ -17,6 +18,7 @@ This project uses **JWT-based authentication**. Users log in with their email an
 3. **Logout:**  
    - Logging out invalidates the refresh token.
    - The access token expires naturally.
+   - User session is cleared.
 
 ## Authentication Endpoints
 
@@ -41,4 +43,6 @@ This project uses **JWT-based authentication**. Users log in with their email an
 - **Session Persistence:** Tokens must be stored securely on the client-side.
 - **Blacklist Handling:** Refresh tokens are invalidated on logout.
 
-For detailed API specs, check **`/swagger`**.
+## Additional Documentation
+
+- For **detailed API documentation**, visit `/swagger/`.

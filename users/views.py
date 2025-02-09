@@ -56,8 +56,9 @@ class LoginView(APIView):
     def post(self, request):
         email = request.data.get("email")
         password = request.data.get("password")
+        session = request.session
 
-        user, access_token, refresh_token = AuthService.login(email, password)
+        user, access_token, refresh_token = AuthService.login(session, email, password)
 
         return SuccessResponse.format(
             message="User logged in successfully",
@@ -103,8 +104,9 @@ class LogoutView(APIView):
     )
     def post(self, request):
         refresh_token = request.data.get("refresh_token")
+        session = request.session
 
-        AuthService.logout(refresh_token)
+        AuthService.logout(session, refresh_token)
 
         return SuccessResponse.format(message="Logged out successfully")
 

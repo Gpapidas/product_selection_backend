@@ -180,3 +180,5 @@ SIMPLE_JWT = {
     "BLACKLIST_AFTER_ROTATION": True,
     "AUTH_HEADER_TYPES": ("Bearer",),
 }
+
+TEST_RUNNER = 'shared.tests.runner.CustomTestRunner'

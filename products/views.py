@@ -40,6 +40,9 @@ class ProductViewSet(viewsets.ReadOnlyModelViewSet):
 
             search_query = self.request.query_params.get("search", session.get("last_search_query", ""))
 
+            # Store the derived search query in self (used in serializer context)
+            self.derived_from_saved_search = search_query if not self.request.query_params.get("search") else None
+
             # Update session with search query
             session["last_search_query"] = search_query
             session.modified = True
@@ -47,6 +50,14 @@ class ProductViewSet(viewsets.ReadOnlyModelViewSet):
             return ProductFilter({"search": search_query}, queryset=queryset).qs
 
         return queryset
+
+    def get_serializer_context(self):
+        """
+        Override serializer context to include derived_from_saved_search.
+        """
+        context = super().get_serializer_context()
+        context["derived_from_saved_search"] = getattr(self, "derived_from_saved_search", None)
+        return context
 
     @extend_schema(
         summary="Retrieve all products",

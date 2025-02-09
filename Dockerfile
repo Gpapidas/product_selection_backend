@@ -17,8 +17,7 @@ COPY development.txt .
 
 # Install dependencies based on the environment
 ARG ENV_NAME
-RUN --mount=type=cache,target=/root/.cache/pip \
-    if [ "$ENV_NAME" = "development" ]; then pip install -r development.txt; else pip install -r requirements.txt; fi
+RUN if [ "$ENV_NAME" = "development" ]; then pip install -r development.txt; else pip install -r requirements.txt; fi
 
 # Copy the rest of the application files
 COPY . .

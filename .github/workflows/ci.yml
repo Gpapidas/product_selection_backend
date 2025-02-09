@@ -1,0 +1,60 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+  build:
+    name: Run Tests and Security Checks
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_DB: product_selection_backend_database_test
+          POSTGRES_USER: product_selection_backend_admin
+          POSTGRES_PASSWORD: product_selection_backend_password
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U product_selection_backend_admin"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    env:
+      DJANGO_SETTINGS_MODULE: product_selection_backend.settings
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r development.txt
+
+      - name: Run Migrations
+        run: python manage.py migrate
+
+      - name: Run Tests
+        run: python manage.py test
+
+      - name: Run Bandit Security Scan
+        run: bandit -r .
+
+      - name: Run Pip Audit
+        run: pip-audit

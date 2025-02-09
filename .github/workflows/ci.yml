@@ -32,6 +32,7 @@ jobs:
 
     env:
       DJANGO_SETTINGS_MODULE: product_selection_backend.settings
+      FRONTEND_URL: http://localhost:5173
 
     steps:
       - name: Checkout Repository

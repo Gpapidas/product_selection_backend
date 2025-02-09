@@ -24,6 +24,3 @@ COPY . .
 
 # Expose the port for the application
 EXPOSE 80
-
-# Default command: Run Django with Gunicorn on port 80
-CMD ["gunicorn", "product_selection_backend.wsgi:application", "--bind", "0.0.0.0:80"]

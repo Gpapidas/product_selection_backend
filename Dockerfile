@@ -17,14 +17,13 @@ COPY development.txt .
 
 # Install dependencies based on the environment
 ARG ENV_NAME
-RUN --mount=type=cache,target=/root/.cache/pip \
-    if [ "$ENV_NAME" = "development" ]; then pip install -r development.txt; else pip install -r requirements.txt; fi
+RUN if [ "$ENV_NAME" = "development" ]; then pip install -r development.txt; else pip install -r requirements.txt; fi
 
 # Copy the rest of the application files
 COPY . .
 
 # Expose the port for the application
-EXPOSE 8000
+EXPOSE 80
 
-# Default command
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+# Default command: Run migrations, collect static, seed data, and start Gunicorn server
+CMD sh -c 'python manage.py migrate && python manage.py collectstatic --noinput && python manage.py seeds && gunicorn product_selection_backend.wsgi:application --bind 0.0.0.0:80'

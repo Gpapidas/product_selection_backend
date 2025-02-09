@@ -8,14 +8,11 @@ services:
       dockerfile: Dockerfile
       args:
         ENV_NAME: 'Production'
-    command: >
-      sh -c "python manage.py migrate &&
-             python manage.py collectstatic --noinput &&
-             gunicorn product_selection_backend.wsgi:application --bind 0.0.0.0:80"
+    command: python manage.py runserver 0.0.0.0:80
     volumes:
       - .:/code
     ports:
-      - "80:80"
+      - "8000:80"
     environment:
       DATABASE_URL: ${DEFAULT_DATABASE_DSN}
     env_file:

@@ -24,3 +24,6 @@ COPY . .
 
 # Expose the port for the application
 EXPOSE 80
+
+# Default command: Run migrations, collect static, seed data, and start Gunicorn server
+CMD sh -c 'python manage.py migrate && python manage.py collectstatic --noinput && python manage.py seeds && gunicorn product_selection_backend.wsgi:application --bind 0.0.0.0:80'

@@ -14,11 +14,11 @@
    ```
 2. Build the containers:
    ```bash
-   docker compose build
+   docker compose -f development.yaml build
    ```
 3. Start the application:
    ```bash
-   docker compose up
+   docker compose -f development.yaml up
    ```
 
 The backend should now be running at `http://127.0.0.1:8000`.
